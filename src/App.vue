@@ -1,15 +1,19 @@
 <script>
-import { useUserStore } from './stores/UserStore'
+import { useUserStore } from "./stores/UserStore";
+import ChangeView from "./components/ChangeView.vue";
 
 export default {
   setup() {
-    const userStore = useUserStore()
+    const userStore = useUserStore();
 
     return {
-      userStore
-    }
-  }
-}
+      userStore,
+    };
+  },
+  components: {
+    ChangeView,
+  },
+};
 </script>
 
 <template>
@@ -21,6 +25,7 @@ export default {
       <router-link :to="{ name: 'EventCreate' }">Create Event</router-link>
       |
       <p>Logged in as {{ userStore.firstName }}</p>
+      <ChangeView />
     </div>
 
     <router-view />
@@ -78,7 +83,7 @@ input {
   margin-bottom: 24px;
 }
 
-input[type='text'] {
+input[type="text"] {
   padding: 0px 10px;
 }
 

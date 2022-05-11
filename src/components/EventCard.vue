@@ -2,8 +2,19 @@
   <router-link
     class="event-link"
     :to="{ name: 'EventDetails', params: { id: event.id } }"
+    v-if="ViewStore.view === 'card'"
   >
     <div class="event-card">
+      <span>@{{ event.time }} on {{ event.date }}</span>
+      <h4>{{ event.title }}</h4>
+    </div>
+  </router-link>
+  <router-link
+    class="event-link"
+    :to="{ name: 'EventDetails', params: { id: event.id } }"
+    v-else
+  >
+    <div class="event-list">
       <span>@{{ event.time }} on {{ event.date }}</span>
       <h4>{{ event.title }}</h4>
     </div>
@@ -11,14 +22,22 @@
 </template>
 
 <script>
+import { useViewStore } from "../stores/ViewStore";
+
 export default {
+  setup() {
+    const ViewStore = useViewStore();
+    return {
+      ViewStore,
+    };
+  },
   props: {
     event: {
       type: Object,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -36,5 +55,17 @@ export default {
 .event-link {
   color: #2c3e50;
   text-decoration: none;
+}
+
+.event-list {
+  padding: 20px;
+  width: 250px;
+  cursor: pointer;
+  border: 1px solid #fd0000;
+  margin-bottom: 18px;
+}
+.event-list:hover {
+  transform: scale(1.01);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
 }
 </style>
