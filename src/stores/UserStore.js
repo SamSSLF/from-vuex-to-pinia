@@ -1,7 +1,12 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
-export const useUserStore = defineStore('UserStore', {
+export const useUserStore = defineStore("UserStore", {
   state: () => ({
-    user: 'Ben Hong'
-  })
-})
+    user: "Ben Hong",
+  }),
+  getters: {
+      firstName() {
+          return this.user.split(' ')[0]
+      }
+  }
+});

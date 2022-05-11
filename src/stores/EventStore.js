@@ -1,10 +1,15 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
-export const useEventStore = defineStore('EventStore', {
+export const useEventStore = defineStore("EventStore", {
   state() {
     return {
       events: [],
-      event: {}
-    }
+      event: {},
+    };
+  },
+  getters: {
+      numberOfEvents(state) {
+          return state.events.length
+      }
   }
-})
+});
